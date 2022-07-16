@@ -57,3 +57,72 @@ table {
 *::after {
     box-sizing: border-box;
 }
+#keypad {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(15px, 1fr));
+    grid-template-rows: repeat(5, minmax(15px, 1fr));
+    grid-template-areas: 
+    "C Del . mult"
+    "one two three divide"
+    "four five six minus"
+    "seven eight nine plus"
+    "comma zer equal equal";
+    gap: 10px;
+    justify-items: stretch;
+}
+.key#clear{
+    grid-area: C;
+}
+.key#del {
+    grid-area: Del;
+}
+#one {
+    background-color: aqua;
+    grid-area: one;
+}
+.key#two {
+    grid-area: two;
+    background-color: blueviolet;
+}
+.key#three {
+    grid-area: three;
+}
+.key#four {
+    grid-area: four;
+}
+.key#five {
+    grid-area: five;
+}
+.key#six {
+    grid-area: six;
+}  
+.key#seven {
+    grid-area: seven;
+}
+.key#eight {
+    grid-area: eight;
+}
+.key#nine {
+    grid-area: nine;
+}
+.key#zer {
+    grid-area: zer;
+}
+.key#comma {
+    grid-area: comma;
+}
+.key#plus {
+    grid-area: plus;
+}
+.key#subtract {
+    grid-area: minus;
+}
+.key#multiply {
+    grid-area: mult;
+}
+.key#divide {
+    grid-area: divide;
+}
+.key#equal {
+    grid-area: equal;
+}
