@@ -11,4 +11,7 @@ const calculator = {
     multiply(x, y){
         return x * y
     },
+    operate(oparator, x, y){
+        return oparator(x, y)
+    },
 };
