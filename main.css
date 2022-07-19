@@ -67,7 +67,7 @@ table {
     "four five six minus"
     "seven eight nine plus"
     "comma zer equal equal";
-    gap: 10px;
+    gap: 5px;
     justify-items: stretch;
 }
 .key#clear{
@@ -77,12 +77,10 @@ table {
     grid-area: Del;
 }
 #one {
-    background-color: aqua;
     grid-area: one;
 }
 .key#two {
     grid-area: two;
-    background-color: blueviolet;
 }
 .key#three {
     grid-area: three;

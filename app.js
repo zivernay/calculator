@@ -1,4 +1,9 @@
 const calculator = {
+    nums : document.querySelectorAll("#keypad .num"),
+    operators : document.querySelectorAll(".keypad .operator"),
+    screenDisplay : document.querySelector("#display"),
+    screenOutput: {line1: "", line2: ""},
+
     add(x, y){
         return x + y
     },
@@ -14,4 +19,13 @@ const calculator = {
     operate(oparator, x, y){
         return oparator(x, y)
     },
+    display(inputs){
+        this.screenOutput.line1 += inputs;
+        this.screenDisplay.textContent = this.screenOutput.line1;
+    },
+};
+//events
+calculator.nums.forEach((num)=>num.addEventListener("click", press))
+function press(e){
+    calculator.display(this.textContent);
 };
