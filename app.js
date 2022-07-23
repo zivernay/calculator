@@ -1,5 +1,5 @@
 const calculator = {
-    nums : document.querySelectorAll("#keypad .num"),
+    keys : document.querySelectorAll("#keypad .key"),
     operators : document.querySelectorAll("#keypad .oparator"),
     screenDisplay : document.querySelector("#display"),
     calcKey : document.querySelector("#equal"),
@@ -27,13 +27,13 @@ const calculator = {
         const ans = calculator[oparator](x, y);
         return ans
     },
-    getArgs(){
+    setArgs(){
         const regEx = /\d+\.?\d*/g;
         const inputs = this.userInputs.expression.match(regEx);
         this.userInputs.arg1 = Number(inputs[0]);
         this.userInputs.arg2 = Number(inputs[1]);
     },
-    hasTwoArgs(){
+    hasTwoNumbers(){
         const regEx = /\d+\.?\d*/g;
         const inputs = this.userInputs.expression.match(regEx);
         if (inputs.length > 1){
@@ -41,38 +41,50 @@ const calculator = {
         }
         return false
     },
-    display(){
-        calculator.screenDisplay.innerHTML = `
-            <span>${calculator.userInputs.expression}</span>
-            <span>${calculator.screenOutput.output}</span>
-        `;
+    showInput(){
+        this.screenDisplay.children[0].textContent = this.userInputs.expression;
     },
-    press(){
-        const entry = this.textContent;
-        calculator.userInputs.expression += entry;
-        calculator.display();
+    showOutput(){
+        this.screenDisplay.children[1].textContent = this.userInputs.output;
     },
-    getOperator(){
-        if (calculator.hasTwoArgs()){
-            calculator.calculate();
-        }
-        calculator.userInputs.operator = this.getAttribute("id");
-        
+    updateExpression(entry){
+        this.userInputs.expression += entry;
+    },
+    setOperator(oparator){
+        this.userInputs.operator = oparator;
     },
     calculate(){
-        calculator.getArgs() //sets arg1 and arg2 in userInputs
+        calculator.setArgs() //sets arg1 and arg2 in userInputs
         const ans = calculator.operate(
             calculator.userInputs.operator,
             calculator.userInputs.arg1,
             calculator.userInputs.arg2,
             );
-        this.screenOutput.output = ans;
-        this.userInputs.expression = ans;
+        return ans
+    },
+    press(){
+        if (this.classList.contains("oparator")){
+            if (calculator.hasTwoNumbers()){
+                const ans = calculator.calculate();
+                calculator.userInputs.expression = ans;
+            }
+            calculator.setOperator(this.getAttribute("id"));
+        } else if(this.classList.contains("equal")){
+            if (calculator.hasTwoNumbers()){
+                const ans = calculator.calculate();
+                calculator.screenOutput.output = ans;
+                calculator.showOutput();
+                return
+            }
+        }
+        const entry = this.textContent;
+        calculator.updateExpression(entry)
+        calculator.showInput();
     },
 };
 //events
-calculator.nums.forEach((num)=>num.addEventListener("click", calculator.press))
+calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press))
 //This in the called method refers to the operator button
-calculator.operators.forEach((operator)=>{operator.addEventListener("click", calculator.getOperator);operator.addEventListener("click", calculator.press);});
-calculator.calcKey.addEventListener("click", calculator.calculate)
-calculator.calcKey.addEventListener("click", calculator.display)
+//calculator.operators.forEach((operator)=>{operator.addEventListener("click", calculator.setOperator);operator.addEventListener("click", calculator.press);});
+//calculator.calcKey.addEventListener("click", calculator.calculate)
+//calculator.calcKey.addEventListener("click", calculator.showInput)
