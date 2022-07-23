@@ -45,7 +45,7 @@ const calculator = {
         this.screenDisplay.children[0].textContent = this.userInputs.expression;
     },
     showOutput(){
-        this.screenDisplay.children[1].textContent = this.userInputs.output;
+        this.screenDisplay.children[1].textContent = this.screenOutput.output;
     },
     updateExpression(entry){
         this.userInputs.expression += entry;
