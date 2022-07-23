@@ -25,9 +25,7 @@ const calculator = {
     },
     operate(oparator, x, y,){
         const ans = calculator[oparator](x, y);
-        this.screenOutput.output = ans;
-        this.userInputs.expression = ans;
-        //this.screenOutput.output = ""; // clear screen by removing ans
+        return ans
     },
     getArgs(){
         const regEx = /\d+\.?\d*/g;
@@ -63,11 +61,13 @@ const calculator = {
     },
     calculate(){
         calculator.getArgs() //sets arg1 and arg2 in userInputs
-        calculator.operate(
+        const ans = calculator.operate(
             calculator.userInputs.operator,
             calculator.userInputs.arg1,
             calculator.userInputs.arg2,
             );
+        this.screenOutput.output = ans;
+        this.userInputs.expression = ans;
     },
 };
 //events
