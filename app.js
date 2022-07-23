@@ -74,6 +74,7 @@ const calculator = {
                 const ans = calculator.calculate();
                 calculator.screenOutput.output = ans;
                 calculator.showOutput();
+                calculator.userInputs.expression = "";
                 return
             }
         }
@@ -83,8 +84,4 @@ const calculator = {
     },
 };
 //events
-calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press))
-//This in the called method refers to the operator button
-//calculator.operators.forEach((operator)=>{operator.addEventListener("click", calculator.setOperator);operator.addEventListener("click", calculator.press);});
-//calculator.calcKey.addEventListener("click", calculator.calculate)
-//calculator.calcKey.addEventListener("click", calculator.showInput)
+calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press));
