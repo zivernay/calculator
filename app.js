@@ -36,7 +36,7 @@ const calculator = {
     hasTwoNumbers(){
         const regEx = /\d+\.?\d*/g;
         const inputs = this.userInputs.expression.match(regEx);
-        if (inputs.length > 1){
+        if (inputs && inputs.length > 1){
             return true
         }
         return false
@@ -62,6 +62,7 @@ const calculator = {
             );
         return ans
     },
+
     press(){
         if (this.classList.contains("oparator")){
             if (calculator.hasTwoNumbers()){
@@ -79,7 +80,7 @@ const calculator = {
             }
         }
         const entry = this.textContent;
-        calculator.updateExpression(entry)
+        (entry != "=")? calculator.updateExpression(entry): console.log("empty inputs");
         calculator.showInput();
     },
 };
