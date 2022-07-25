@@ -33,10 +33,10 @@ const calculator = {
         this.userInputs.arg1 = Number(inputs[0]);
         this.userInputs.arg2 = Number(inputs[1]);
     },
-    hasTwoNumbers(){
+    hasNumber(num){
         const regEx = /\d+\.?\d*/g;
         const inputs = this.userInputs.expression.match(regEx);
-        if (inputs && inputs.length > 1){
+        if (inputs && inputs.length == num){
             return true
         }
         return false
@@ -65,7 +65,7 @@ const calculator = {
 
     press(){
         if (this.classList.contains("oparator")){
-            if (calculator.hasTwoNumbers()){
+            if (calculator.hasNumber(2)){
                 const ans = calculator.calculate();
                 calculator.userInputs.expression = ans;
             } else if (calculator.userInputs.expression == "" && (typeof calculator.screenOutput.output == "number")){
@@ -73,13 +73,13 @@ const calculator = {
             }
             calculator.setOperator(this.getAttribute("id"));
         } else if(this.classList.contains("equal")){
-            if (calculator.hasTwoNumbers()){
+            if (calculator.hasNumber(2)){
                 const ans = calculator.calculate();
                 calculator.screenOutput.output = ans;
                 calculator.showOutput();
                 calculator.userInputs.expression = "";
                 return
-            }
+            }// else if (calculator.hasNumber(1)){}
         }
         const entry = this.textContent;
         (entry != "=")? calculator.updateExpression(entry): console.log("empty inputs");
