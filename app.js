@@ -68,6 +68,8 @@ const calculator = {
             if (calculator.hasTwoNumbers()){
                 const ans = calculator.calculate();
                 calculator.userInputs.expression = ans;
+            } else if (calculator.userInputs.expression == "" && (typeof calculator.screenOutput.output == "number")){
+                calculator.userInputs.expression = calculator.screenOutput.output;
             }
             calculator.setOperator(this.getAttribute("id"));
         } else if(this.classList.contains("equal")){
