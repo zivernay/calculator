@@ -103,7 +103,12 @@ const calculator = {
     pressClear(){
         calculator.userInputs.expression = "";
         calculator.showInput();
-    }
+    },
+    pressDel(){
+        const endIndex = (calculator.userInputs.expression.length > 0)? calculator.userInputs.expression.length - 1 : 0;
+        calculator.userInputs.expression = calculator.userInputs.expression.slice(0, endIndex);
+        calculator.showInput();
+    },
 };
 //events
 calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press));
