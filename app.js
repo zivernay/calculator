@@ -1,7 +1,7 @@
 const calculator = {
     keys : document.querySelectorAll("#keypad .key"),
     equalKey : document.querySelector("#equal"),
-    operators : document.querySelectorAll("#keypad .oparator"),
+    operatorKeys : document.querySelectorAll("#keypad .oparator"),
     screenDisplay : document.querySelector("#display"),
     calcKey : document.querySelector("#equal"),
     userInputs: {
@@ -65,15 +65,6 @@ const calculator = {
         return ans
     },
     press(){
-        if (this.classList.contains("oparator")){
-            if (calculator.hasNumber(2)){
-                const ans = calculator.calculate();
-                calculator.userInputs.expression = ans;
-            } else if (calculator.userInputs.expression == "" && (typeof calculator.screenOutput.output == "number")){
-                calculator.userInputs.expression = calculator.screenOutput.output;
-            }
-            calculator.setOperator(this.getAttribute("id"));
-        }
         const entry = this.textContent;
         if (calculator.userInputs.expression == "" && entry != "="){
             calculator.showOutput("");
@@ -96,7 +87,17 @@ const calculator = {
             return
         }
     },
+    pressOperator(){
+        if (calculator.hasNumber(2)){
+            const ans = calculator.calculate();
+            calculator.userInputs.expression = ans;
+        } else if (calculator.userInputs.expression == "" && (typeof calculator.screenOutput.output == "number")){
+            calculator.userInputs.expression = calculator.screenOutput.output;
+        }
+        calculator.setOperator(this.getAttribute("id"));
+    }
 };
 //events
 calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press));
 calculator.equalKey.addEventListener("click", calculator.pressEquals);
+calculator.operatorKeys.forEach((key)=>key.addEventListener("click", calculator.pressOperator));
