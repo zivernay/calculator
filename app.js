@@ -27,11 +27,14 @@ const calculator = {
         const ans = calculator[oparator](x, y);
         return ans
     },
-    setArgs(){
+    setArgs(num){
         const regEx = /\d+\.?\d*/g;
         const inputs = this.userInputs.expression.match(regEx);
-        this.userInputs.arg1 = Number(inputs[0]);
-        this.userInputs.arg2 = Number(inputs[1]);
+        for (let i = 0; i < num; i++){
+            this.userInputs[`arg${i+1}`] = Number(inputs[i]);
+        }
+        //this.userInputs.arg1 = Number(inputs[0]);
+        //this.userInputs.arg2 = Number(inputs[1]);
     },
     hasNumber(num){
         const regEx = /\d+\.?\d*/g;
@@ -41,11 +44,11 @@ const calculator = {
         }
         return false
     },
-    showInput(){
-        this.screenDisplay.children[0].textContent = this.userInputs.expression;
+    showInput(input = this.userInputs.expression){
+        this.screenDisplay.children[0].textContent = input;
     },
-    showOutput(){
-        this.screenDisplay.children[1].textContent = this.screenOutput.output;
+    showOutput(input = this.screenOutput.output){
+        this.screenDisplay.children[1].textContent = input;
     },
     updateExpression(entry){
         this.userInputs.expression += entry;
@@ -54,7 +57,7 @@ const calculator = {
         this.userInputs.operator = oparator;
     },
     calculate(){
-        calculator.setArgs() //sets arg1 and arg2 in userInputs
+        calculator.setArgs(2) //sets arg1 and arg2 in userInputs
         const ans = calculator.operate(
             calculator.userInputs.operator,
             calculator.userInputs.arg1,
@@ -79,9 +82,18 @@ const calculator = {
                 calculator.showOutput();
                 calculator.userInputs.expression = "";
                 return
-            }// else if (calculator.hasNumber(1)){}
+            } else if (calculator.hasNumber(1)){
+                calculator.setArgs(1);
+                calculator.screenOutput.output = calculator.userInputs.arg1;
+                calculator.showOutput();
+                calculator.userInputs.expression = "";
+                return
+            }
         }
         const entry = this.textContent;
+        if (calculator.userInputs.expression == "" && entry != "="){
+            calculator.showOutput("");
+        }
         (entry != "=")? calculator.updateExpression(entry): console.log("empty inputs");
         calculator.showInput();
     },
