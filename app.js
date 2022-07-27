@@ -1,5 +1,6 @@
 const calculator = {
     keys : document.querySelectorAll("#keypad .key"),
+    equalKey : document.querySelector("#equal"),
     operators : document.querySelectorAll("#keypad .oparator"),
     screenDisplay : document.querySelector("#display"),
     calcKey : document.querySelector("#equal"),
@@ -33,8 +34,6 @@ const calculator = {
         for (let i = 0; i < num; i++){
             this.userInputs[`arg${i+1}`] = Number(inputs[i]);
         }
-        //this.userInputs.arg1 = Number(inputs[0]);
-        //this.userInputs.arg2 = Number(inputs[1]);
     },
     hasNumber(num){
         const regEx = /\d+\.?\d*/g;
@@ -65,7 +64,6 @@ const calculator = {
             );
         return ans
     },
-
     press(){
         if (this.classList.contains("oparator")){
             if (calculator.hasNumber(2)){
@@ -75,20 +73,6 @@ const calculator = {
                 calculator.userInputs.expression = calculator.screenOutput.output;
             }
             calculator.setOperator(this.getAttribute("id"));
-        } else if(this.classList.contains("equal")){
-            if (calculator.hasNumber(2)){
-                const ans = calculator.calculate();
-                calculator.screenOutput.output = ans;
-                calculator.showOutput();
-                calculator.userInputs.expression = "";
-                return
-            } else if (calculator.hasNumber(1)){
-                calculator.setArgs(1);
-                calculator.screenOutput.output = calculator.userInputs.arg1;
-                calculator.showOutput();
-                calculator.userInputs.expression = "";
-                return
-            }
         }
         const entry = this.textContent;
         if (calculator.userInputs.expression == "" && entry != "="){
@@ -97,6 +81,22 @@ const calculator = {
         (entry != "=")? calculator.updateExpression(entry): console.log("empty inputs");
         calculator.showInput();
     },
+    pressEquals(){
+        if (calculator.hasNumber(2)){
+            const ans = calculator.calculate();
+            calculator.screenOutput.output = ans;
+            calculator.showOutput();
+            calculator.userInputs.expression = "";
+            return
+        } else if (calculator.hasNumber(1)){
+            calculator.setArgs(1);
+            calculator.screenOutput.output = calculator.userInputs.arg1;
+            calculator.showOutput();
+            calculator.userInputs.expression = "";
+            return
+        }
+    },
 };
 //events
 calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press));
+calculator.equalKey.addEventListener("click", calculator.pressEquals);
