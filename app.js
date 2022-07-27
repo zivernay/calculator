@@ -2,6 +2,8 @@ const calculator = {
     keys : document.querySelectorAll("#keypad .key"),
     equalKey : document.querySelector("#equal"),
     operatorKeys : document.querySelectorAll("#keypad .oparator"),
+    clearKey : document.querySelector("#clear"),
+    delKey : document.querySelector("#del"),
     screenDisplay : document.querySelector("#display"),
     calcKey : document.querySelector("#equal"),
     userInputs: {
@@ -65,13 +67,15 @@ const calculator = {
         return ans
     },
     press(){
-        const entry = this.textContent;
-        if (calculator.userInputs.expression == "" && entry != "="){
-            calculator.showOutput("");
-        }
-        (entry != "=")? calculator.updateExpression(entry): console.log("empty inputs");
-        calculator.showInput();
-    },
+        if (this.classList.contains("num") || this.classList.contains("oparator")){
+            const entry = this.textContent;
+            if (calculator.userInputs.expression == ""){
+                calculator.showOutput("");
+            }
+            calculator.updateExpression(entry);
+            calculator.showInput();
+            }
+        },
     pressEquals(){
         if (calculator.hasNumber(2)){
             const ans = calculator.calculate();
@@ -95,9 +99,16 @@ const calculator = {
             calculator.userInputs.expression = calculator.screenOutput.output;
         }
         calculator.setOperator(this.getAttribute("id"));
+    },
+    pressClear(){
+        calculator.userInputs.expression = "";
+        calculator.showInput();
     }
 };
 //events
 calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press));
 calculator.equalKey.addEventListener("click", calculator.pressEquals);
 calculator.operatorKeys.forEach((key)=>key.addEventListener("click", calculator.pressOperator));
+calculator.clearKey.addEventListener("click", calculator.pressClear);
+calculator.delKey.addEventListener("click", calculator.pressDel);
+
