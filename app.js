@@ -69,6 +69,7 @@ const calculator = {
     press(){
         if (this.classList.contains("num") || this.classList.contains("oparator")){
             const entry = this.textContent;
+            //clear previous outpts when starting new calculation
             if (calculator.userInputs.expression == ""){
                 calculator.showOutput("");
             }
@@ -95,6 +96,9 @@ const calculator = {
         if (calculator.hasNumber(2)){
             const ans = calculator.calculate();
             calculator.userInputs.expression = ans;
+            calculator.screenOutput.output = ans;
+            calculator.showOutput();
+            // Allow coculator to use previous answer as an argument for the next calculation
         } else if (calculator.userInputs.expression == "" && (typeof calculator.screenOutput.output == "number")){
             calculator.userInputs.expression = calculator.screenOutput.output;
         }
@@ -111,9 +115,8 @@ const calculator = {
     },
 };
 //events
-calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press));
 calculator.equalKey.addEventListener("click", calculator.pressEquals);
 calculator.operatorKeys.forEach((key)=>key.addEventListener("click", calculator.pressOperator));
 calculator.clearKey.addEventListener("click", calculator.pressClear);
 calculator.delKey.addEventListener("click", calculator.pressDel);
-
+calculator.keys.forEach((key)=>key.addEventListener("click", calculator.press));
