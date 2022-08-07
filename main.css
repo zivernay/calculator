@@ -99,8 +99,8 @@ body {
 }
 #keypad {
     display: grid;
-    grid-template-columns: repeat(4, minmax(15px, 60px));
-    grid-template-rows: repeat(5, minmax(15px, 45px));
+    grid-template-columns: repeat(4, minmax(30px, 60px));
+    grid-template-rows: repeat(5, minmax(30px, 45px));
     grid-template-areas: 
     "neg C Del mult"
     "one two three divide"
@@ -207,4 +207,9 @@ body {
     height: 30px;
     align-self: center;
     background-color: #0476D9;
+}
+#neg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
