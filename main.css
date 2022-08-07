@@ -52,10 +52,23 @@ table {
     layout
 =================================================
 */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+#calculator {
+    width: 300px;
+    height: 460px;
+    background-color: #034C8C;
+    border-radius: 20px;
+    padding: 36px 15px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+#display {
+    display: flex;
+    flex-direction: column;
+    height: 64px;
+    width: 100%;
+    background-color: #EAFDCA;
+    border-radius: 4px;
 }
 #keypad {
     display: grid;
@@ -68,7 +81,7 @@ table {
     "seven eight nine plus"
     "comma zer equal equal";
     gap: 5px;
-    justify-items: stretch;
+    width: 100%;
 }
 .key#clear{
     grid-area: C;
@@ -126,9 +139,12 @@ table {
 }
 
 /*
-    display
+======================================
+    custom styles
+======================================
 */
-#display {
-    display: flex;
-    flex-direction: column;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
