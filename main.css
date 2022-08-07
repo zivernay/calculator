@@ -81,13 +81,9 @@ body {
 }
 #calculator {
     width: 285px;
-    height: 460px;
     background-color: #034C8C;
     border-radius: 20px;
     padding: 36px 15px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
 }
 #display {
     display: flex;
@@ -96,11 +92,12 @@ body {
     width: 100%;
     background-color: #EAFDCA;
     border-radius: 4px;
+    margin-bottom: 32px;
 }
 #keypad {
     display: grid;
-    grid-template-columns: repeat(4, minmax(30px, 60px));
-    grid-template-rows: repeat(5, minmax(30px, 45px));
+    grid-template-columns: repeat(4, minmax(26px, 60px));
+    grid-template-rows: repeat(5, minmax(32px, 45px));
     grid-template-areas: 
     "neg C Del mult"
     "one two three divide"
