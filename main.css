@@ -53,7 +53,7 @@ table {
 =================================================
 */
 #calculator {
-    width: 300px;
+    width: 285px;
     height: 460px;
     background-color: #034C8C;
     border-radius: 20px;
@@ -72,16 +72,19 @@ table {
 }
 #keypad {
     display: grid;
-    grid-template-columns: repeat(4, minmax(15px, 1fr));
-    grid-template-rows: repeat(5, minmax(15px, 1fr));
+    grid-template-columns: repeat(4, minmax(15px, 60px));
+    grid-template-rows: repeat(5, minmax(15px, 45px));
     grid-template-areas: 
-    "C Del . mult"
+    "neg C Del mult"
     "one two three divide"
     "four five six minus"
     "seven eight nine plus"
     "comma zer equal equal";
     gap: 5px;
     width: 100%;
+}
+.key#neg {
+    grid-area: neg;
 }
 .key#clear{
     grid-area: C;
@@ -147,4 +150,26 @@ table {
 *::before,
 *::after {
     box-sizing: border-box;
+}
+/*
+=================================================
+    keys
+=================================================
+*/
+.key {
+    border-radius: 4px;
+}
+.key.num {
+    background-color: #E7E4F2;
+}
+.key.oparator, #neg {
+    background-color: #BBBDF2;
+}
+#equal {
+    background-color: #BF7381;
+}
+.key.control {
+    height: 30px;
+    align-self: center;
+    background-color: #0476D9;
 }
