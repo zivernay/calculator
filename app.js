@@ -1,11 +1,12 @@
 const calculator = {
     keys : document.querySelectorAll("#keypad .key"),
     equalKey : document.querySelector("#equal"),
-    operatorKeys : document.querySelectorAll("#keypad .oparator"),
+    operatorKeys : document.querySelectorAll("#keypad .operator"),
     clearKey : document.querySelector("#clear"),
     delKey : document.querySelector("#del"),
     screenDisplay : document.querySelector("#display"),
     calcKey : document.querySelector("#equal"),
+    neg : document.querySelector("#neg"),
     userInputs: {
             expression: "",
             arg1 : null,
@@ -26,12 +27,12 @@ const calculator = {
     multiply(x, y){
         return x * y
     },
-    operate(oparator, x, y,){
-        const ans = calculator[oparator](x, y);
+    operate(operator, x, y,){
+        const ans = calculator[operator](x, y);
         return ans
     },
     setArgs(num){
-        const regEx = /\d+\.?\d*/g;
+        const regEx = /-?\d+\.?\d*/g;
         const inputs = this.userInputs.expression.match(regEx);
         for (let i = 0; i < num; i++){
             this.userInputs[`arg${i+1}`] = Number(inputs[i]);
@@ -54,8 +55,8 @@ const calculator = {
     updateExpression(entry){
         this.userInputs.expression += entry;
     },
-    setOperator(oparator){
-        this.userInputs.operator = oparator;
+    setOperator(operator){
+        this.userInputs.operator = operator;
     },
     calculate(){
         calculator.setArgs(2) //sets arg1 and arg2 in userInputs
@@ -66,8 +67,12 @@ const calculator = {
             );
         return ans
     },
+    negative(){
+        calculator.updateExpression("-");
+        calculator.showInput();
+    },
     press(){
-        if (this.classList.contains("num") || this.classList.contains("oparator")){
+        if (this.classList.contains("num") || this.classList.contains("operator")){
             const entry = this.textContent;
             //clear previous outpts when starting new calculation
             if (calculator.userInputs.expression == ""){
@@ -115,6 +120,7 @@ const calculator = {
     },
 };
 //events
+calculator.neg.addEventListener("click", calculator.negative);
 calculator.equalKey.addEventListener("click", calculator.pressEquals);
 calculator.operatorKeys.forEach((key)=>key.addEventListener("click", calculator.pressOperator));
 calculator.clearKey.addEventListener("click", calculator.pressClear);
