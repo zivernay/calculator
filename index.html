@@ -7,12 +7,15 @@
         <meta name="author" content="Doma Z.A">
         <link rel="stylesheet" href="./main.css">
         <script src="./app.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"> 
     </head>
     <body>
         <main id="calculator">
             <section id="display">
                 <div class="screen" id="expression"></div>
-                <div class="screen" id="answer"></div>
+                <div class="screen" id="answer">0</div>
             </section>
             <section id="keypad">
                 <button class="key control" id="clear">Clear</button>
@@ -31,10 +34,10 @@
                 <button class="key num" id="zer">0</button>
                 <button class="key num" id="comma">.</button>
                 <!-- operators -->
-                <button class="key oparator" id="plus">+</button>
-                <button class="key oparator" id="subtract">-</button>
-                <button class="key oparator" id="multiply">×</button>
-                <button class="key oparator" id="divide">÷</button>
+                <button class="key operator" id="plus">+</button>
+                <button class="key operator" id="subtract">-</button>
+                <button class="key operator" id="multiply">×</button>
+                <button class="key operator" id="divide">÷</button>
                 <!-- equal -->
                 <button class="key equal" id="equal">=</button>
         </main>
