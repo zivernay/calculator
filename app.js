@@ -65,10 +65,20 @@ const calculator = {
             calculator.userInputs.arg1,
             calculator.userInputs.arg2,
             );
-        return ans
+        return this.roundAns(ans)
     },
     roundAns(ans){
-        const rounded = ans.floor
+        if (ans.toString().length > 10){
+            if (ans > 999999){
+                return ans.toExponential(10)
+            }else {
+                //get digit length so that the the comma can be place specific to making the answer 10 digits
+                const len = Math.round(ans).toString().length;
+                const decimalPoint = 10 - len;
+                 return ans.toFixed(decimalPoint);
+            }
+        }
+        return ans
     },
     negative(){
         calculator.updateExpression("-");
@@ -114,6 +124,7 @@ const calculator = {
     },
     pressClear(){
         calculator.userInputs.expression = "";
+        calculator.showOutput(0);
         calculator.showInput();
     },
     pressDel(){
