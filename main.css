@@ -67,6 +67,12 @@ body,
 .key.equal {
     font-weight: 700;
 }
+#display .screen {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 0.5em;
+}
 
 /*
 =================================================

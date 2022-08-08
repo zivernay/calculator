@@ -67,6 +67,9 @@ const calculator = {
             );
         return ans
     },
+    roundAns(ans){
+        const rounded = ans.floor
+    },
     negative(){
         calculator.updateExpression("-");
         calculator.showInput();
